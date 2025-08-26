@@ -1,7 +1,0 @@
-name: "pulltainer"
-
-services:
-  pulltainer:
-    build: .
-    env_file: .env.development
-    restart: unless-stopped
