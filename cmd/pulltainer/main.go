@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"cmp"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -18,7 +19,7 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-var client = &http.Client{Timeout: 10 * time.Second}
+var client = &http.Client{}
 
 type Stack struct {
 	ID         int    `json:"Id"`
@@ -206,6 +207,13 @@ func putStack(stack Stack, stackFile string) error {
 }
 
 func main() {
+	timeout, err := time.ParseDuration(cmp.Or(os.Getenv("PULLTAINER_TIMEOUT"), "1m"))
+	if err != nil {
+		log.Println(fmt.Errorf("error: parsing timeout %w\n defaulting to 1m", err))
+		timeout = time.Minute
+	}
+
+	client.Timeout = timeout
 	c := cron.New()
 	if cronSpec == "" {
 		cronSpec = "0 4 * * *"

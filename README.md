@@ -20,6 +20,8 @@ services:
       PULLTAINER_API_KEY: "ptr_o+EcmI+HyjUJXqrYUoU9YZAKSCyOWWnHPrOZTmwBoOU="
       # Optional: use Portainer Business Edition update checker to skip stacks not marked as outdated
       # PULLTAINER_BE_API: "false"
+      # Optional: customize HTTP timeout
+      # PULLTAINER_TIMEOUT: "1m"
     image: "ghcr.io/eiqnepm/pulltainer:v0.1.0"
     restart: "unless-stopped"
 ```
