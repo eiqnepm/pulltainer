@@ -22,6 +22,6 @@ services:
       # PULLTAINER_BE_API: "false"
       # Optional: customize HTTP timeout
       # PULLTAINER_TIMEOUT: "1m"
-    image: "ghcr.io/eiqnepm/pulltainer:v0.1.0"
+    image: "ghcr.io/eiqnepm/pulltainer:v0.1.1"
     restart: "unless-stopped"
 ```
