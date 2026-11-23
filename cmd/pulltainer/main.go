@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"cmp"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -214,6 +215,14 @@ func main() {
 	}
 
 	client.Timeout = timeout
+
+	if strings.EqualFold(os.Getenv("PULLTAINER_INSECURE_SKIP_VERIFY"), "true") {
+		transport := http.DefaultTransport.(*http.Transport).Clone()
+		transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+		client.Transport = transport
+		log.Println("warning: TLS certificate verification is disabled")
+	}
+
 	c := cron.New()
 	if cronSpec == "" {
 		cronSpec = "0 4 * * *"
