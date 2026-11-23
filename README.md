@@ -22,6 +22,8 @@ services:
       # PULLTAINER_BE_API: "false"
       # Optional: customize HTTP timeout
       # PULLTAINER_TIMEOUT: "1m"
+      # Optional: skip TLS certificate verification, e.g. for self-signed certificates (insecure)
+      # PULLTAINER_INSECURE_SKIP_VERIFY: "false"
     image: "ghcr.io/eiqnepm/pulltainer:v0.1.2"
     restart: "unless-stopped"
 ```
