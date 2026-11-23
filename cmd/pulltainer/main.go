@@ -199,6 +199,12 @@ func putStack(stack Stack, stackFile string) error {
 		return fmt.Errorf("do: %w", err)
 	}
 
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Println("error: put stack: close: ", err)
+		}
+	}()
+
 	if resp.StatusCode != 200 {
 		return fmt.Errorf("status: %w", errors.New(resp.Status))
 	}
